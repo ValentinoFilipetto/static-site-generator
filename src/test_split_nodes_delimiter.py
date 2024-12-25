@@ -125,7 +125,7 @@ class TestSplitNodesDelimeter(unittest.TestCase):
             "This is text with an image ![boot dev](./../image)",
             TextType.NORMAL_TEXT,
         )
-        new_nodes = split_nodes_images([node])
+        new_nodes = split_nodes_image([node])
 
         self.assertEqual(
             new_nodes,
@@ -140,7 +140,7 @@ class TestSplitNodesDelimeter(unittest.TestCase):
             "This is text with an image ![boot dev](./../image) and ![youtube](./../images/youtube)",
             TextType.NORMAL_TEXT,
         )
-        new_nodes = split_nodes_images([node])
+        new_nodes = split_nodes_image([node])
 
         self.assertEqual(
             new_nodes,
