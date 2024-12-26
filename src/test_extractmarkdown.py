@@ -64,6 +64,60 @@ class TestExtractMarkdown(unittest.TestCase):
             ],
         )
 
+    def test_block_to_block_types_heading(self):
+        block = "###### This is a subheading"
+
+        self.assertEqual(block_to_block_type(block), BlockType.HEADING)
+
+    def test_block_to_block_types_code(self):
+        block = """
+        ```
+        This is a code block
+    	```
+        """
+
+        self.assertEqual(block_to_block_type(block), BlockType.CODE)
+
+    def test_block_to_block_types_quote(self):
+        block = """
+        > This is a quote block
+        > This is a quote block
+        """
+
+        self.assertEqual(block_to_block_type(block), BlockType.QUOTE)
+
+    def test_block_to_block_types_unordered_list(self):
+        block = """
+        * This is a unordered list block
+        * This is a unorederd list block
+        """
+
+        self.assertEqual(block_to_block_type(block), BlockType.U_LIST)
+
+    def test_block_to_block_types_unordered_list_dash(self):
+        block = """
+        - This is a unordered list block
+        - This is a unorederd list block
+        """
+
+        self.assertEqual(block_to_block_type(block), BlockType.U_LIST)
+
+    def test_block_to_block_types_ordered_list(self):
+        block = """
+        1. This is a ordered list block
+        2. This is a ordered list block
+        """
+
+        self.assertEqual(block_to_block_type(block), BlockType.O_LIST)
+
+    def test_block_to_block_types_paragragh(self):
+        block = """
+        This is a paragraph block
+        This is a paragraph block
+        """
+
+        self.assertEqual(block_to_block_type(block), BlockType.PARAGRAPH)
+
     # def test_extract_title(self):
     #     text = """# Lorem ipsum dolor sit amet,
     #             consectetur adipiscing elit,
