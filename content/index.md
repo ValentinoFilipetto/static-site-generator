@@ -1,6 +1,6 @@
 # Tolkien Fan Club
 
-**I like Tolkien**. Read my [first post here](/majesty) (sorry the link doesn't work yet)
+**I like Tolkien**. Read my [first post here](/majesty)
 
 > All that is gold does not glitter
 
@@ -30,7 +30,3 @@ func main(){
     fmt.Println("Hello, World!")
 }
 ```
-
-Look at a picture of Rivendell:
-
-![Rivendell](/images/rivendell.png)
