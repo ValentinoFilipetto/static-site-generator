@@ -1,11 +1,13 @@
-# from textnode import TextNode, TextType
+import copy_files
 
 
-# def main():
-#     new_node = TextNode(
-#         "This is my text", TextType.BOLD_TEXT, "https://hello-world.com"
-#     )
-#     print(new_node)
+dir_path_static = "./static"
+dir_path_public = "./public"
 
 
-# main()
+def main():
+    print("Copying static files to public directory...")
+    copy_files(dir_path_static, dir_path_public)
+
+
+main()
