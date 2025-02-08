@@ -14,3 +14,13 @@ class LeafNode(HTMLNode):
             return f"<{self.tag}>{self.value}</{self.tag}>"
         else:
             return f"<{self.tag} {super().props_to_html()}>{self.value}</{self.tag}>"
+
+    def __eq__(self, other):
+        if (
+            self.tag == other.tag
+            and self.value == other.value
+            and self.props == other.props
+        ):
+            return True
+        else:
+            return False

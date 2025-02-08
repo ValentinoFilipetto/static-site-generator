@@ -6,8 +6,8 @@ class BlockType(Enum):
     HEADING = "heading"
     CODE = "code"
     QUOTE = "quote"
-    U_LIST = "unordered list"
-    O_LIST = "ordered list"
+    U_LIST = "unordered_list"
+    O_LIST = "ordered_list"
     PARAGRAPH = "paragraph"
 
 
@@ -20,16 +20,8 @@ def extract_markdown_links(text):
 
 
 def markdown_to_blocks(text):
-    splitted_text = text.split("\n\n")
-    blocks = []
-
-    for block in splitted_text:
-        if block == "":
-            continue
-        else:
-            blocks.append(block.strip())
-
-    return blocks
+    blocks = re.split(r"\n\s*\n", text)  # Split on two or more newlines
+    return [block.strip() for block in blocks if block.strip()]
 
 
 def is_quote_block(text):
@@ -74,20 +66,35 @@ def is_ordered_list_block(text):
 
 
 def block_to_block_type(block):
+    lines = block.split("\n")
 
-    match block:
-        case _ if bool(re.match(r"^#{1,6}\s", block)):
-            return BlockType.HEADING
-        case _ if block.strip().startswith("```") and block.strip().endswith("```"):
-            return BlockType.CODE
-        case _ if is_quote_block(block) == True:
-            return BlockType.QUOTE
-        case _ if is_unordered_list_block(block) == True:
-            return BlockType.U_LIST
-        case _ if is_ordered_list_block(block) == True:
-            return BlockType.O_LIST
-        case _:
-            return BlockType.PARAGRAPH
+    if block.startswith(("# ", "## ", "### ", "#### ", "##### ", "###### ")):
+        return BlockType.HEADING
+    if len(lines) > 1 and lines[0].startswith("```") and lines[-1].startswith("```"):
+        return BlockType.CODE
+    if block.startswith(">"):
+        for line in lines:
+            if not line.startswith(">"):
+                return BlockType.PARAGRAPH
+        return BlockType.QUOTE
+    if block.startswith("* "):
+        for line in lines:
+            if not line.startswith("* "):
+                return BlockType.PARAGRAPH
+        return BlockType.U_LIST
+    if block.startswith("- "):
+        for line in lines:
+            if not line.startswith("- "):
+                return BlockType.PARAGRAPH
+        return BlockType.U_LIST
+    if block.startswith("1. "):
+        i = 1
+        for line in lines:
+            if not line.startswith(f"{i}. "):
+                return BlockType.PARAGRAPH
+            i += 1
+        return BlockType.O_LIST
+    return BlockType.PARAGRAPH
 
 
 # def extract_title(markdown):

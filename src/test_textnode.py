@@ -1,7 +1,7 @@
 import unittest
 
 from leafnode import LeafNode
-from textnode import TextNode, TextType
+from textnode import TextNode, TextType, text_node_to_html_node
 
 
 class TestTextNode(unittest.TestCase):
@@ -35,23 +35,23 @@ class TestTextNode(unittest.TestCase):
 
     def test_text_node_to_html(self):
         node = TextNode("This is a text node", TextType.ITALIC_TEXT)
-        html_node = node.text_node_to_html_node()
+        html_node = text_node_to_html_node(node)
         self.assertEqual(node.text, html_node.value)
 
     def test_text_node_italics(self):
         node = TextNode("This is a text node", TextType.ITALIC_TEXT)
-        html_node = node.text_node_to_html_node()
+        html_node = text_node_to_html_node(node)
         self.assertEqual(html_node.tag, "i")
 
     def test_text_node_bold(self):
         node = TextNode("This is a text node", TextType.BOLD_TEXT)
-        html_node = node.text_node_to_html_node()
+        html_node = text_node_to_html_node(node)
         self.assertEqual(html_node.tag, "b")
 
     def test_text_node_error(self):
         node = TextNode("This is a text node", "nonexistent text type")
         with self.assertRaises(Exception):
-            node.text_node_to_html_node()
+            text_node_to_html_node(node)
 
 
 if __name__ == "__main__":
