@@ -41,13 +41,9 @@ def text_to_children(text):
 
 
 def paragraph_to_html_node(block):
-    print(f"Processing paragraph block: {repr(block)}")
     lines = block.strip().split("\n")  # Normalize block by trimming and splitting
-    print(f"Split lines: {lines}")
     paragraph = " ".join(lines).strip()
-    print(f"Joined paragraph: {paragraph}")
     children = text_to_children(paragraph)
-    print(f"Children generated: {children}")
     return ParentNode("p", children)
 
 

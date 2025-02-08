@@ -78,28 +78,28 @@ class TestExtractMarkdown(unittest.TestCase):
         block = "paragraph"
         self.assertEqual(block_to_block_type(block), BlockType.PARAGRAPH)
 
-    # def test_extract_title(self):
-    #     text = """# Lorem ipsum dolor sit amet,
-    #             consectetur adipiscing elit,
-    #             sed do eiusmod tempor incididunt
-    #             ut labore et dolore magna aliqua."""
-    #     self.assertEqual(extract_title(text), "Lorem ipsum dolor sit amet,")
+    def test_extract_title(self):
+        text = """# Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua."""
+        self.assertEqual(extract_title(text), "Lorem ipsum dolor sit amet,")
 
-    # def test_extract_title_with_subheader(self):
-    #     text = """# Lorem ipsum dolor sit amet,
-    #             consectetur adipiscing elit,
-    #             ## sed do eiusmod tempor incididunt
-    #             ut labore et dolore magna aliqua."""
-    #     self.assertEqual(extract_title(text), "Lorem ipsum dolor sit amet,")
+    def test_extract_title_with_subheader(self):
+        text = """# Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit,
+                ## sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua."""
+        self.assertEqual(extract_title(text), "Lorem ipsum dolor sit amet,")
 
-    # def test_missing_header(self):
-    #     text = """## Lorem ipsum dolor sit amet,
-    #             consectetur adipiscing elit,
-    #             sed do eiusmod tempor incididunt
-    #             ut labore et dolore magna aliqua."""
+    def test_missing_header(self):
+        text = """## Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua."""
 
-    #     with self.assertRaises(Exception):
-    #         extract_title(text)
+        with self.assertRaises(Exception):
+            extract_title(text)
 
 
 if __name__ == "__main__":

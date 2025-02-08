@@ -97,14 +97,10 @@ def block_to_block_type(block):
     return BlockType.PARAGRAPH
 
 
-# def extract_title(markdown):
-#     array_of_lines = markdown.split("\n")
-#     header = None
+def extract_title(markdown):
+    array_of_lines = markdown.split("\n")
 
-#     if array_of_lines[0].startswith("# ", 0, 2):
-#         return array_of_lines[0].strip("# ")
-
-#     if header == None:
-#         raise Exception("No header found in document")
-
-#     return header
+    if array_of_lines[0].startswith("# ", 0, 2):
+        return array_of_lines[0].strip("# ")
+    else:
+        raise Exception("No header found in document")
